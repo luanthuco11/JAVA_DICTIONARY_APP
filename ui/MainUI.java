@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.Stack;
 public class MainUI {
     static List<String> contentFeatures = List.of("Search by slang word", 
@@ -57,7 +57,7 @@ public class MainUI {
         swapPanel(menu);
         
         contentFeatures.forEach(item -> {
-            Button btn = new Button(item);
+            JButton btn = new JButton(item);
             btn.setBackground(Color.blue);
             btn.setFont(new Font("Arial", Font.PLAIN, 18));
             btn.setForeground(Color.white);
@@ -67,23 +67,23 @@ public class MainUI {
 
         
 
-        Button backButton = new Button("Go back");
+        JButton backButton = new JButton("Go back");
         backButton.setPreferredSize(new Dimension(100,20));
 
         backButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 goBack();
             };
         });
 
 
-        java.awt.Component comp = menu.getComponent(0);
-        if (comp instanceof java.awt.Button) {  
-            java.awt.Button btn = (java.awt.Button) comp;
-            btn.addActionListener(new java.awt.event.ActionListener() {
+        Component comp = menu.getComponent(0);
+        if (comp instanceof JButton) {  
+            JButton btn = (JButton) comp;
+            btn.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(java.awt.event.ActionEvent e) { 
+                public void actionPerformed(ActionEvent e) { 
                     JPanel wrap = new JPanel(new BorderLayout());
                     wrap.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
                     wrap.add(backButton, BorderLayout.NORTH);
@@ -93,27 +93,29 @@ public class MainUI {
             });
         }
           comp = menu.getComponent(1);
-        if (comp instanceof java.awt.Button) {  
-            java.awt.Button btn = (java.awt.Button) comp;
-            btn.addActionListener(new java.awt.event.ActionListener() {
+        if (comp instanceof JButton) {  
+            JButton btn = (JButton) comp;
+            btn.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(java.awt.event.ActionEvent e) { 
-                    JPanel wrap = new JPanel();
-                    wrap.add(backButton);
-                    wrap.add(SearchByDefinitionUI.createAndShowGUI(data));
+                public void actionPerformed(ActionEvent e) { 
+                    JPanel wrap = new JPanel(new BorderLayout());
+                    wrap.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+                    wrap.add(backButton, BorderLayout.NORTH);
+                    wrap.add(SearchByDefinitionUI.createAndShowGUI(data), BorderLayout.CENTER);
                     swapPanel(wrap);
                 }
             });
         }
         comp = menu.getComponent(2);
-        if (comp instanceof java.awt.Button) {  
-            java.awt.Button btn = (java.awt.Button) comp;
-            btn.addActionListener(new java.awt.event.ActionListener() {
+        if (comp instanceof JButton) {  
+            JButton btn = (JButton) comp;
+            btn.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(java.awt.event.ActionEvent e) { 
-                    JPanel wrap = new JPanel();
-                    wrap.add(backButton);
-                    wrap.add(HistoryUI.createAndShowGUI(data));
+                public void actionPerformed(ActionEvent e) { 
+                 JPanel wrap = new JPanel(new BorderLayout());
+                    wrap.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+                    wrap.add(backButton, BorderLayout.NORTH);
+                    wrap.add(HistoryUI.createAndShowGUI(data),BorderLayout.CENTER);
                     swapPanel(wrap);
                 }
             });

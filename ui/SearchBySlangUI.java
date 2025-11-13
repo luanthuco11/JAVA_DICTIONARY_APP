@@ -28,8 +28,14 @@ public class SearchBySlangUI {
         public void actionPerformed(ActionEvent e) {
            String value = input.getText();
             String result = data.listHashMap.get(value);
+            if(result != null){
             if(!result.isEmpty()) data.histories.add(value + "`" + result);
-           output.setText(result);
+                    output.setText(result);
+            }else{
+                output.setText(" ");
+            }
+           output.revalidate();
+           output.repaint();
             
         }
     }

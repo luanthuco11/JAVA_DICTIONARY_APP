@@ -1,10 +1,4 @@
 package ui;
-import java.awt.BorderLayout;
-
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.BorderFactory;
@@ -37,16 +31,24 @@ public class SearchByDefinitionUI {
            String value = input.getText();
      
            List<String> results = data.listSlang.get(value);
-           if (results != null) {
-                JList<String> list = new JList<>(results.toArray(new String[0]));
-                output.removeAll();
-                output.add(new JScrollPane(list));
-                output.revalidate();
-                output.repaint();
+            output.setLayout(new BorderLayout());
+            
+            if(results != null){
+                 if (!results.isEmpty()) {
+                    JList<String> list = new JList<>(results.toArray(new String[0]));
+
+                    output.removeAll();
+                    JScrollPane scroll = new JScrollPane(list);
+            
+                    output.add(scroll);
+                
+                }
             }else{
-                output.removeAll();
+                 output.removeAll();
             }
-          
+           
+            output.revalidate();
+            output.repaint();
             
         }
     }
@@ -74,9 +76,13 @@ public class SearchByDefinitionUI {
         center.add(input, gbc);
         
         
-       
+        JLabel outputLabel = new JLabel("Output");
+        gbc.gridx = 0;
+        gbc.gridy =1;
 
-        JPanel outputList = new JPanel();
+        center.add(outputLabel,gbc);
+
+        JPanel outputList = new JPanel(new BorderLayout());
         gbc.gridx = 0;
         gbc.gridx = 1;
         gbc.weighty = 1;
