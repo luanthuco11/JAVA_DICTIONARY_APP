@@ -1,8 +1,14 @@
 package ui;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
-import javax.swing.BoxLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.BorderFactory;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -46,30 +52,44 @@ public class SearchByDefinitionUI {
     }
     public static JPanel createAndShowGUI(Data data){
         JPanel result = new JPanel(new BorderLayout());
+        result.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); 
 
+        JPanel center = new JPanel(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel inputLabel = new JLabel("Input");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+
+        center.add(inputLabel,gbc);
+        
         JTextField input = new JTextField();
-        input.setColumns(10);
+        input.setColumns(20);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+
+        center.add(input, gbc);
+        
+        
        
-        JButton button = new JButton("OK");
 
-        JPanel center = new JPanel(new FlowLayout());
-
-        JPanel left =new JPanel();
-        left.setLayout(new BoxLayout(left, BoxLayout.Y_AXIS));
-        left.add(input);
-
-      
         JPanel outputList = new JPanel();
-        outputList.setLayout(new BoxLayout(outputList, BoxLayout.Y_AXIS));
-
+        gbc.gridx = 0;
+        gbc.gridx = 1;
+        gbc.weighty = 1;
+        outputList.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        center.add(outputList, gbc);
+       
+        JButton button = new JButton("Confirm");
         button.addActionListener(new ButtonListener(input, outputList, data));
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridheight = 2;
 
-        left.add(outputList);
-        JPanel right =new JPanel();
-        right.add(button);
-
-        center.add(left);
-        center.add(right);
+        center.add(button, gbc);
 
 
         result.add(center, BorderLayout.CENTER);

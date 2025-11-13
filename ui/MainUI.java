@@ -1,19 +1,17 @@
 package ui;
 import models.*;
-import java.lang.reflect.Array;
 import java.util.List;
 
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Stack;
 public class MainUI {
-    static List<String> contentFeatures = List.of("Tìm kiếm theo slang word", 
-    "Tìm kiếm theo definition", "Lịch sử đã tìm kiếm theo slang word", 
-    "Quản lý slang word", "Reset danh sách slang word", "Random slang word",
-    "Đố vui tìm nghĩa của slang word", "Đố vui tìm slang word theo nghĩa");
+    static List<String> contentFeatures = List.of("Search by slang word", 
+    "Search by definition", "Histories search by slang word", 
+    "Manage slang word", "Reset list of slang word", "Random slang word",
+    "Quiz to find mean by slang word", "Quiz to find slang word by meaning");
    
 
     private static JFrame mainFrame;
@@ -22,7 +20,7 @@ public class MainUI {
 
     private static  void swapPanel(JPanel panel) {
             if (container.getComponentCount() > 0) {
-                nav.push((JPanel) container.getComponent(0)); // lưu panel hiện tại
+                nav.push((JPanel) container.getComponent(0)); 
                 container.removeAll();
             }
             container.add(panel);
@@ -44,20 +42,34 @@ public class MainUI {
         mainFrame.setSize(800, 500);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+       
+    
         container = new JPanel();
-        mainFrame.add(container);
+        container.setBackground(Color.yellow);
+        mainFrame.add(container, BorderLayout.CENTER);
         
+        container.setBorder(BorderFactory.createEmptyBorder(50, 10, 10, 10));
+        JPanel menu = new JPanel(new GridLayout(4,2, 10,10));
 
-        JPanel menu = new JPanel(new GridLayout(4,2));
+        
+        menu.setPreferredSize(new Dimension(600, 300));
 
         swapPanel(menu);
         
-        contentFeatures.forEach(item -> menu.add(new Button(item)));
+        contentFeatures.forEach(item -> {
+            Button btn = new Button(item);
+            btn.setBackground(Color.blue);
+            btn.setFont(new Font("Arial", Font.PLAIN, 18));
+            btn.setForeground(Color.white);
+            menu.add(btn);
+        });
     
 
-
+        
 
         Button backButton = new Button("Go back");
+        backButton.setPreferredSize(new Dimension(100,20));
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -72,9 +84,10 @@ public class MainUI {
             btn.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) { 
-                    JPanel wrap = new JPanel();
-                    wrap.add(backButton);
-                    wrap.add(SearchBySlangUI.createAndShowGUI(data));
+                    JPanel wrap = new JPanel(new BorderLayout());
+                    wrap.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+                    wrap.add(backButton, BorderLayout.NORTH);
+                    wrap.add(SearchBySlangUI.createAndShowGUI(data), BorderLayout.CENTER);
                     swapPanel(wrap);
                 }
             });

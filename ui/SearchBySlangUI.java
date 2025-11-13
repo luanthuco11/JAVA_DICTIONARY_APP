@@ -1,13 +1,16 @@
 package ui;
 import models.*;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+
 import java.awt.event.*;
 public class SearchBySlangUI {
 
@@ -32,29 +35,54 @@ public class SearchBySlangUI {
     }
 
     public static JPanel createAndShowGUI(Data data){
-        JPanel result = new JPanel(new BorderLayout());
+       JPanel result = new JPanel(new BorderLayout());
+        result.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); 
+
+    
+        JPanel center = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); 
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+       
+        JLabel inputLabel = new JLabel("Input:");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+       
+        center.add(inputLabel, gbc);
 
         JTextField input = new JTextField();
-        input.setColumns(10);
+        input.setColumns(20);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+      
+        center.add(input, gbc);
 
-        JLabel output = new JLabel("");
+      
+        JLabel outputLabel = new JLabel("Output:");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+      
+        center.add(outputLabel, gbc);
 
-        JButton button = new JButton("OK");
+        JLabel output = new JLabel(" ");
+        output.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+        output.setFont(new Font("Arial", Font.PLAIN, 15));
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.weightx = 1;
+        center.add(output, gbc);
 
+   
+        JButton button = new JButton("Confirm");
         button.addActionListener(new ButtonListener(input, output, data));
 
-        JPanel center = new JPanel(new FlowLayout());
-
-        JPanel left =new JPanel();
-        left.setLayout(new BoxLayout(left, BoxLayout.Y_AXIS));
-        left.add(input);
-        left.add(output);
-
-        JPanel right =new JPanel();
-        right.add(button);
-
-        center.add(left);
-        center.add(right);
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridheight = 2; 
+        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.VERTICAL;
+        center.add(button, gbc);
 
         result.add(center, BorderLayout.CENTER);
         return result;
