@@ -1,8 +1,8 @@
 import ui.MainUI;
-import models.Data;
+import models.SlangWordManager;
 public class Main{
     public static void main(String[] args) {
-        Data data = new Data();
+        SlangWordManager data = new SlangWordManager();
         MainUI.creatAndShowGUI(data);
     }
     

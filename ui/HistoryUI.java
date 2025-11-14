@@ -10,7 +10,7 @@ import javax.swing.JScrollPane;
 
 import models.*;
 public class HistoryUI {
-    public static  JPanel createAndShowGUI(Data data)
+    public static  JPanel createAndShowGUI(SlangWordManager data)
     {
         JPanel results = new JPanel(new BorderLayout());
         Collections.reverse(data.histories);

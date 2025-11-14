@@ -19,8 +19,8 @@ public class SearchByDefinitionUI {
     static class ButtonListener implements ActionListener {
         private JTextField input;
         private JPanel output;
-        private Data data;
-        public ButtonListener(JTextField input, JPanel output, Data data) {
+        private SlangWordManager data;
+        public ButtonListener(JTextField input, JPanel output, SlangWordManager data) {
             this.input = input;
             this.output = output;
             this.data = data;
@@ -52,7 +52,7 @@ public class SearchByDefinitionUI {
             
         }
     }
-    public static JPanel createAndShowGUI(Data data){
+    public static JPanel createAndShowGUI(SlangWordManager data){
         JPanel result = new JPanel(new BorderLayout());
         result.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); 
 

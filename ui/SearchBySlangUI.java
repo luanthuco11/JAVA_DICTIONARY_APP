@@ -18,8 +18,8 @@ public class SearchBySlangUI {
     static class ButtonListener implements ActionListener {
         private JTextField input;
         private JLabel output;
-        private Data data;
-        public ButtonListener(JTextField input, JLabel output, Data data) {
+        private SlangWordManager data;
+        public ButtonListener(JTextField input, JLabel output, SlangWordManager data) {
             this.input = input;
             this.output = output;
             this.data = data;
@@ -27,7 +27,7 @@ public class SearchBySlangUI {
         @Override
         public void actionPerformed(ActionEvent e) {
            String value = input.getText();
-            String result = data.listHashMap.get(value);
+            String result = data.listHashMap.get(value).getMean();
             if(result != null){
             if(!result.isEmpty()) data.histories.add(value + "`" + result);
                     output.setText(result);
@@ -40,7 +40,7 @@ public class SearchBySlangUI {
         }
     }
 
-    public static JPanel createAndShowGUI(Data data){
+    public static JPanel createAndShowGUI(SlangWordManager data){
        JPanel result = new JPanel(new BorderLayout());
         result.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); 
 

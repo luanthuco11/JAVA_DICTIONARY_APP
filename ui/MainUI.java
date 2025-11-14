@@ -36,7 +36,7 @@ public class MainUI {
             container.repaint();
         }
     }
-    public static void creatAndShowGUI(Data data)
+    public static void creatAndShowGUI(SlangWordManager data)
     {
         mainFrame = new JFrame("Dictionary App");
         mainFrame.setSize(800, 500);
@@ -120,7 +120,20 @@ public class MainUI {
                 }
             });
         }
-        
+         comp = menu.getComponent(3);
+        if (comp instanceof JButton) {  
+            JButton btn = (JButton) comp;
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) { 
+                 JPanel wrap = new JPanel(new BorderLayout());
+                    wrap.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+                    wrap.add(backButton, BorderLayout.NORTH);
+                    wrap.add(ManageUI.createAndShowGUI(data),BorderLayout.CENTER);
+                    swapPanel(wrap);
+                }
+            });
+        }
         mainFrame.setVisible(true);
 
     }
