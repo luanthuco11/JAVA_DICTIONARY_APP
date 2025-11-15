@@ -1,5 +1,7 @@
 package ui;
 import models.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -141,6 +143,19 @@ public class MainUI {
                 @Override
                 public void actionPerformed(ActionEvent e) { 
                     data.resetSlangWords();
+                }
+            });
+        }
+        comp = menu.getComponent(5);
+        if (comp instanceof JButton) {  
+            JButton btn = (JButton) comp;
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) { 
+                    int randomNum = data.getRandomNumber();
+                    List<String> listKey = new ArrayList<>(data.listHashMap.keySet());
+                    String message = listKey.get(randomNum) +" - " + data.listHashMap.get(listKey.get(randomNum)).getMean();
+                    JOptionPane.showMessageDialog(container, message, "The random slang word on this day", JOptionPane.INFORMATION_MESSAGE);
                 }
             });
         }

@@ -5,9 +5,11 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -121,5 +123,21 @@ public class SlangWordManager {
         }
         listSlang = newMeans;
         System.out.println("Reset done");
+    }
+    public int getRandomNumber() {
+    
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH); 
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        long seed = (long)year * 10000 + (long)month * 100 + day; 
+        
+        Random random = new Random(seed);
+        
+        int range = listHashMap.size();
+        int randomNumber = random.nextInt(range);
+
+        return randomNumber;
     }
 }
