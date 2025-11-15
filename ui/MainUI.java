@@ -134,6 +134,16 @@ public class MainUI {
                 }
             });
         }
+        comp = menu.getComponent(4);
+        if (comp instanceof JButton) {  
+            JButton btn = (JButton) comp;
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) { 
+                    data.resetSlangWords();
+                }
+            });
+        }
         mainFrame.setVisible(true);
 
     }
