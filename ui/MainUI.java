@@ -159,6 +159,34 @@ public class MainUI {
                 }
             });
         }
+        comp = menu.getComponent(6);
+        if (comp instanceof JButton) {  
+            JButton btn = (JButton) comp;
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) { 
+                    JPanel wrap = new JPanel(new BorderLayout());
+                    wrap.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+                    wrap.add(backButton, BorderLayout.NORTH);
+                    wrap.add(QuizUI.createAndShowGUI(data, "slang"),BorderLayout.CENTER);
+                    swapPanel(wrap);
+                }
+            });
+        }
+        comp = menu.getComponent(7);
+        if (comp instanceof JButton) {  
+            JButton btn = (JButton) comp;
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) { 
+                    JPanel wrap = new JPanel(new BorderLayout());
+                    wrap.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+                    wrap.add(backButton, BorderLayout.NORTH);
+                    wrap.add(QuizUI.createAndShowGUI(data, "mean"),BorderLayout.CENTER);
+                    swapPanel(wrap);
+                }
+            });
+        }
         mainFrame.setVisible(true);
 
     }
