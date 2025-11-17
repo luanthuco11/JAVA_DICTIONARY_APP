@@ -107,7 +107,7 @@ public class ManageUI {
                 String slang = inputSlang.getText();
                 String mean = inputMean.getText();
                 if(!slang.equals("") && !mean.equals("") ){
-                    dataTable.addRow(List.of(slang, slang,mean).toArray());
+                    
                     if(data.isExist(slang)){
                         Object[] options = {"Overwrite", "Duplicate"};
 
@@ -125,9 +125,10 @@ public class ManageUI {
                         
                         if (option == JOptionPane.YES_OPTION) {
                             data.addSlangOverwrite(new SlangWord(slang, mean));
+                      
                         } else if (option == JOptionPane.NO_OPTION) {
-                           
                             data.addSlangDup(new SlangWord(slang, mean));
+                            
                         } 
                     }else{
                         data.addSlangOverwrite(new SlangWord(slang, mean));
@@ -165,7 +166,7 @@ public class ManageUI {
                         if (option == JOptionPane.YES_OPTION) {
                            
                             int modelRow = table.convertRowIndexToModel(row);
-                            data.deleteSlangWord(dataTable.getValueAt(modelRow, 1).toString());
+                            data.deleteSlangWord(dataTable.getValueAt(modelRow, 0).toString());
                             dataTable.removeRow(modelRow);;
                         }
                
