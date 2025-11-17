@@ -29,9 +29,16 @@ public class ManageUI {
         
         result.setBackground(Color.BLUE);
         
-        String[] colsName = {"Old Slang", "Slang", "Mean"};
+        String[] colsName = {"Old Slang","Old mean", "Slang", "Mean"};
         
-        DefaultTableModel dataTable = new DefaultTableModel(colsName, 0);
+        DefaultTableModel dataTable = new DefaultTableModel(colsName, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // KHÓA cột 0 (Old Slang)
+                if (column == 0 || column == 1) return false;
+                return true; // các cột còn lại sửa được
+            }
+        };
         
         dataTable.addTableModelListener(new TableModelListener() {
             @Override
@@ -41,9 +48,10 @@ public class ManageUI {
                 int colIndex = e.getColumn(); 
                 if(rowIndex >= 0 && colIndex >= 0){
                     String oldKey = dataTable.getValueAt(rowIndex, 0).toString();
-                    String newKey = dataTable.getValueAt(rowIndex, 1).toString();
-                    String newMean =  dataTable.getValueAt(rowIndex, 2).toString();
-                    data.editSlangWord(oldKey, new SlangWord(newKey, newMean));     
+                    String oldMean = dataTable.getValueAt(rowIndex, 1).toString();
+                    String newKey = dataTable.getValueAt(rowIndex, 2).toString();
+                    String newMean =  dataTable.getValueAt(rowIndex, 3).toString();
+                    data.editSlangWord(new SlangWord(oldKey, oldMean), new SlangWord(newKey, newMean));     
                 }        
         }
     }) ;
@@ -51,8 +59,8 @@ public class ManageUI {
             
       
 
-        for (SlangWord value : data.listHashMap.values()) {
-            dataTable.addRow(List.of(value.getSlang(), value.getSlang(), value.getMean()).toArray());
+        for (SlangWord value : data.listSlang.values()) {
+            dataTable.addRow(List.of(value.getSlang(), value.getMean(), value.getSlang(),value.getMean()).toArray());
         }
 
         JTable table = new JTable(dataTable);
@@ -62,7 +70,7 @@ public class ManageUI {
         sorter.toggleSortOrder(0);  
 
         JScrollPane scroll = new JScrollPane(table);
-
+        scroll.setPreferredSize(new Dimension(0, 300));
         JPanel addSection = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);

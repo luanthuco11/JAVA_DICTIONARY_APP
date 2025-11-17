@@ -47,7 +47,6 @@ public class MainUI {
        
     
         container = new JPanel();
-        container.setBackground(Color.yellow);
         mainFrame.add(container, BorderLayout.CENTER);
         
         container.setBorder(BorderFactory.createEmptyBorder(50, 10, 10, 10));
@@ -86,10 +85,18 @@ public class MainUI {
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) { 
-                    JPanel wrap = new JPanel(new BorderLayout());
+                    JPanel wrap = new JPanel(new GridBagLayout());
+                    GridBagConstraints gbc = new GridBagConstraints();
+                    gbc.gridx = 0;
+                    gbc.gridy = 0;
+
                     wrap.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-                    wrap.add(backButton, BorderLayout.NORTH);
-                    wrap.add(SearchBySlangUI.createAndShowGUI(data), BorderLayout.CENTER);
+                    wrap.add(backButton, gbc);
+
+                    gbc.gridx = 1;
+                    gbc.gridy = 1;
+                
+                    wrap.add(SearchBySlangUI.createAndShowGUI(data), gbc);
                     swapPanel(wrap);
                 }
             });
@@ -100,10 +107,18 @@ public class MainUI {
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) { 
-                    JPanel wrap = new JPanel(new BorderLayout());
+                    JPanel wrap = new JPanel(new GridBagLayout());
+                    GridBagConstraints gbc = new GridBagConstraints();
+                    gbc.gridx = 0;
+                    gbc.gridy = 0;
+
                     wrap.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-                    wrap.add(backButton, BorderLayout.NORTH);
-                    wrap.add(SearchByDefinitionUI.createAndShowGUI(data), BorderLayout.CENTER);
+                    wrap.add(backButton, gbc);
+
+                    gbc.gridx = 1;
+                    gbc.gridy = 1;
+
+                    wrap.add(SearchByDefinitionUI.createAndShowGUI(data), gbc);
                     swapPanel(wrap);
                 }
             });
@@ -114,10 +129,17 @@ public class MainUI {
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) { 
-                 JPanel wrap = new JPanel(new BorderLayout());
+                    JPanel wrap = new JPanel(new GridBagLayout());
+                    GridBagConstraints gbc = new GridBagConstraints();
+                    gbc.gridx = 0;
+                    gbc.gridy = 0;
+
                     wrap.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-                    wrap.add(backButton, BorderLayout.NORTH);
-                    wrap.add(HistoryUI.createAndShowGUI(data),BorderLayout.CENTER);
+                    wrap.add(backButton, gbc);
+
+                    gbc.gridx = 1;
+                    gbc.gridy = 1;
+                    wrap.add(HistoryUI.createAndShowGUI(data),gbc);
                     swapPanel(wrap);
                 }
             });
@@ -128,10 +150,17 @@ public class MainUI {
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) { 
-                 JPanel wrap = new JPanel(new BorderLayout());
-                    wrap.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-                    wrap.add(backButton, BorderLayout.NORTH);
-                    wrap.add(ManageUI.createAndShowGUI(data),BorderLayout.CENTER);
+                      JPanel wrap = new JPanel(new GridBagLayout());
+                    GridBagConstraints gbc = new GridBagConstraints();
+                    gbc.gridx = 0;
+                    gbc.gridy = 0;
+
+                    wrap.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20));
+                    wrap.add(backButton, gbc);
+
+                    gbc.gridx = 1;
+                    gbc.gridy = 1;
+                    wrap.add(ManageUI.createAndShowGUI(data),gbc);
                     swapPanel(wrap);
                 }
             });
@@ -153,8 +182,8 @@ public class MainUI {
                 @Override
                 public void actionPerformed(ActionEvent e) { 
                     int randomNum = data.getRandomNumber();
-                    List<String> listKey = new ArrayList<>(data.listHashMap.keySet());
-                    String message = listKey.get(randomNum) +" - " + data.listHashMap.get(listKey.get(randomNum)).getMean();
+                    List<String> listKey = new ArrayList<>(data.listSlang.keySet());
+                    String message = listKey.get(randomNum) +" - " + data.listSlang.get(listKey.get(randomNum)).getMean();
                     JOptionPane.showMessageDialog(container, message, "The random slang word on this day", JOptionPane.INFORMATION_MESSAGE);
                 }
             });
@@ -165,10 +194,17 @@ public class MainUI {
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) { 
-                    JPanel wrap = new JPanel(new BorderLayout());
+                         JPanel wrap = new JPanel(new GridBagLayout());
+                    GridBagConstraints gbc = new GridBagConstraints();
+                    gbc.gridx = 0;
+                    gbc.gridy = 0;
+
                     wrap.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-                    wrap.add(backButton, BorderLayout.NORTH);
-                    wrap.add(QuizUI.createAndShowGUI(data, "slang"),BorderLayout.CENTER);
+                    wrap.add(backButton, gbc);
+
+                    gbc.gridx = 1;
+                    gbc.gridy = 1;
+                    wrap.add(QuizUI.createAndShowGUI(data, "slang"),gbc);
                     swapPanel(wrap);
                 }
             });
@@ -179,10 +215,17 @@ public class MainUI {
             btn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) { 
-                    JPanel wrap = new JPanel(new BorderLayout());
+                         JPanel wrap = new JPanel(new GridBagLayout());
+                    GridBagConstraints gbc = new GridBagConstraints();
+                    gbc.gridx = 0;
+                    gbc.gridy = 0;
+
                     wrap.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-                    wrap.add(backButton, BorderLayout.NORTH);
-                    wrap.add(QuizUI.createAndShowGUI(data, "mean"),BorderLayout.CENTER);
+                    wrap.add(backButton, gbc);
+
+                    gbc.gridx = 1;
+                    gbc.gridy = 1;
+                    wrap.add(QuizUI.createAndShowGUI(data, "mean"),gbc);
                     swapPanel(wrap);
                 }
             });

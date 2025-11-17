@@ -1,5 +1,5 @@
 package ui;
-import javax.swing.*;
+
 import java.awt.*;
 import javax.swing.BorderFactory;
 
@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import java.util.List;
+import java.util.Set;
 import java.awt.event.*;
 import models.*;
 public class SearchByDefinitionUI {
@@ -30,7 +31,7 @@ public class SearchByDefinitionUI {
           
            String value = input.getText();
      
-           List<String> results = data.listSlang.get(value);
+           Set<String> results = data.listMean.get(value);
             output.setLayout(new BorderLayout());
             
             if(results != null){

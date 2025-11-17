@@ -61,9 +61,9 @@ public class QuizUI {
     }
     public static JPanel  createAndShowGUI(SlangWordManager data, String type)
     {
-        List<String> listKey = new ArrayList<>(data.listHashMap.keySet());
+        List<String> listKey = new ArrayList<>(data.listSlang.keySet());
         Random random = new Random();
-        int range = data.listHashMap.size();
+        int range = data.listSlang.size();
         int randomNumber = random.nextInt(range);
 
         List<Number> listReposInt = new ArrayList<>();
@@ -80,10 +80,10 @@ public class QuizUI {
         if(type.equals("slang")){
            
             String question = listKey.get(randomNumber);
-            String correctRes = data.listHashMap.get(question).getMean();
+            String correctRes = data.listSlang.get(question).getMean();
 
             listReposInt.forEach( numb ->{
-                fakeRes.add(data.listHashMap.get(listKey.get(numb.intValue())).getMean());
+                fakeRes.add(data.listSlang.get(listKey.get(numb.intValue())).getMean());
             });
 
             
@@ -92,7 +92,7 @@ public class QuizUI {
             return displayBoard(question, fakeRes, correctRes);
 
         }else {
-                String question = data.listHashMap.get(listKey.get(randomNumber)).getMean();
+                String question = data.listSlang.get(listKey.get(randomNumber)).getMean();
                 String correctRes = listKey.get(randomNumber);
 
                 listReposInt.forEach( numb ->{

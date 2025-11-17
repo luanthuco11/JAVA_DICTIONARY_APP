@@ -3,23 +3,15 @@ import models.*;
 
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.Border;
-
 import java.awt.event.*;
 public class SearchBySlangUI {
 
 
     static class ButtonListener implements ActionListener {
         private JTextField input;
-        private JLabel output;
+        private JTextArea output;
         private SlangWordManager data;
-        public ButtonListener(JTextField input, JLabel output, SlangWordManager data) {
+        public ButtonListener(JTextField input, JTextArea output, SlangWordManager data) {
             this.input = input;
             this.output = output;
             this.data = data;
@@ -27,13 +19,20 @@ public class SearchBySlangUI {
         @Override
         public void actionPerformed(ActionEvent e) {
            String value = input.getText();
-            String result = data.listHashMap.get(value).getMean();
-            if(result != null){
-            if(!result.isEmpty()) data.histories.add(value + "`" + result);
-                    output.setText(result);
-            }else{
-                output.setText(" ");
-            }
+           if(!value.equals("")){
+                SlangWord result = data.listSlang.get(value);
+                if(result != null){
+                    String mean = result.getMean();   
+                    if(!mean.isEmpty()) data.histories.add(value + "`" + mean);
+                            output.setText(mean);
+                            output.setCaretPosition(0);
+                    }else{
+                        output.setText(" ");
+                }
+           }else{
+             output.setText(" ");
+           }
+            
            output.revalidate();
            output.repaint();
             
@@ -71,13 +70,18 @@ public class SearchBySlangUI {
       
         center.add(outputLabel, gbc);
 
-        JLabel output = new JLabel(" ");
+        JTextArea output = new JTextArea(2, 20);
         output.setBorder(BorderFactory.createLineBorder(Color.BLUE));
         output.setFont(new Font("Arial", Font.PLAIN, 15));
+        output.setEditable(false);        
+        output.setLineWrap(false);       
+        output.setWrapStyleWord(false); 
+        JScrollPane scroll = new JScrollPane(output,JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);    
+        
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.weightx = 1;
-        center.add(output, gbc);
+        center.add(scroll, gbc);
 
    
         JButton button = new JButton("Confirm");
