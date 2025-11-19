@@ -6,6 +6,8 @@ import java.util.List;
 
 
 import javax.swing.*;
+import javax.swing.text.AttributeSet.ColorAttribute;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Stack;
@@ -59,9 +61,9 @@ public class MainUI {
         
         contentFeatures.forEach(item -> {
             JButton btn = new JButton(item);
-            btn.setBackground(Color.blue);
+            btn.setBackground(Color.decode("#64CCC5"));
             btn.setFont(new Font("Arial", Font.PLAIN, 18));
-            btn.setForeground(Color.white);
+            btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
             menu.add(btn);
         });
     
@@ -69,6 +71,7 @@ public class MainUI {
         
 
         JButton backButton = new JButton("Go back");
+        backButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         backButton.setPreferredSize(new Dimension(100,20));
 
         backButton.addActionListener(new ActionListener() {
@@ -196,6 +199,7 @@ public class MainUI {
                 public void actionPerformed(ActionEvent e) { 
                          JPanel wrap = new JPanel(new GridBagLayout());
                     GridBagConstraints gbc = new GridBagConstraints();
+                     gbc.insets = new Insets(5, 5, 5, 5); 
                     gbc.gridx = 0;
                     gbc.gridy = 0;
 
@@ -217,6 +221,7 @@ public class MainUI {
                 public void actionPerformed(ActionEvent e) { 
                          JPanel wrap = new JPanel(new GridBagLayout());
                     GridBagConstraints gbc = new GridBagConstraints();
+                     gbc.insets = new Insets(5, 5, 5, 5); 
                     gbc.gridx = 0;
                     gbc.gridy = 0;
 

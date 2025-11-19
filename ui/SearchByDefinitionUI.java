@@ -9,7 +9,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import java.util.List;
 import java.util.Set;
 import java.awt.event.*;
 import models.*;

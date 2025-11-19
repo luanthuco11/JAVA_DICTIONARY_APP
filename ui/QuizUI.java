@@ -1,53 +1,57 @@
 package ui;
 
 import javax.swing.JPanel;
-
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
-import javax.xml.crypto.Data;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-
 import models.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class QuizUI {
 
-    public static JPanel displayBoard (String ques, List<String> respo, String correctResponse){
+    public static JPanel displayBoard (String ques, List<String> respo, String correctResponse , SlangWordManager data, String type){
         JPanel result = new JPanel(new BorderLayout());
 
         JPanel questionContainer = new JPanel();
-        JLabel question = new JLabel(ques);
+       JLabel question = new JLabel(ques);
+        question.setFont(new Font("Arial", Font.BOLD, 18));
+        question.setForeground(Color.decode("#333333"));
+        question.setHorizontalAlignment(SwingConstants.CENTER);
+        Border line = BorderFactory.createLineBorder(Color.decode("#80B3FF"), 2); 
+        Border padding = BorderFactory.createEmptyBorder(10, 10, 10, 10);          
+        question.setBorder(BorderFactory.createCompoundBorder(line, padding));
+        
+
         questionContainer.add(question);
 
-        JPanel responseContainer = new JPanel(new GridLayout(2,2));
+        JPanel responseContainer = new JPanel(new GridLayout(2,2, 10, 10));
 
        respo.forEach(res ->{
             JButton response = new JButton(res);
-        
+            response.setCursor(new Cursor(Cursor.HAND_CURSOR));
             response.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e){
                     if(res.equals(correctResponse)){
-                         JOptionPane.showMessageDialog(result, "You are right", "Result", JOptionPane.INFORMATION_MESSAGE);
+                         JOptionPane.showMessageDialog(null, "You are right", "Result", JOptionPane.INFORMATION_MESSAGE);
                     }else
                     {
-                        JOptionPane.showMessageDialog(result, "You are wrong", "Result", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "You are wrong", "Result", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                     Container parent = result.getParent(); 
+                    if(parent != null){
+                        parent.remove(result);
+                        parent.add(QuizUI.createAndShowGUI(data, type)); 
+                        parent.revalidate();
+                        parent.repaint();
                     }
                 }
 
@@ -57,6 +61,7 @@ public class QuizUI {
        
         result.add(questionContainer, BorderLayout.CENTER);
         result.add(responseContainer, BorderLayout.SOUTH);
+
         return result;
     }
     public static JPanel  createAndShowGUI(SlangWordManager data, String type)
@@ -89,7 +94,7 @@ public class QuizUI {
             
             fakeRes.add(correctRes);
             Collections.shuffle(fakeRes);
-            return displayBoard(question, fakeRes, correctRes);
+            return displayBoard(question, fakeRes, correctRes, data,type);
 
         }else {
                 String question = data.listSlang.get(listKey.get(randomNumber)).getMean();
@@ -98,13 +103,11 @@ public class QuizUI {
                 listReposInt.forEach( numb ->{
                     fakeRes.add(listKey.get(numb.intValue()));
                 });
-
-                
                 fakeRes.add(correctRes);
                 Collections.shuffle(fakeRes);
-                return displayBoard(question, fakeRes, correctRes);
+                return displayBoard(question, fakeRes, correctRes, data, type);
         }
-
+        
       
     }
 }

@@ -13,9 +13,8 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-
 import java.util.List;
-import java.util.Map;
+
 
 import models.*;
 import java.awt.*;
@@ -34,9 +33,8 @@ public class ManageUI {
         DefaultTableModel dataTable = new DefaultTableModel(colsName, 0){
             @Override
             public boolean isCellEditable(int row, int column) {
-                // KHÓA cột 0 (Old Slang)
                 if (column == 0 || column == 1) return false;
-                return true; // các cột còn lại sửa được
+                return true; 
             }
         };
         
@@ -139,7 +137,7 @@ public class ManageUI {
                 
             }
         });
-
+        addBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         addSection.add(addBtn, gbc);
 
         JPopupMenu popupMenu = new JPopupMenu();
